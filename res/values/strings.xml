@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Common -->
+    <string name="app_name">NFC App Launcher</string>
+        
+    <!-- Activity -->
+    <string name="app_header">NFC App Launcher helps you programming your NFC tags to launch an application.\nThis is working with Android 4.0 (Ice Cream Sandwich) and higher.\n\nEnter an application package name:</string>
+    <string name="button_write">Write NFC Tag</string>
+    <string name="help_toast">Bring your phone close to a NFC tag to overwrite it.</string>
+
+    <!-- Error messages -->
+    <string name="error_success">Tag has been written! </string>
+    <string name="error_fail">Write operation Failed! </string>
+
+</resources>
