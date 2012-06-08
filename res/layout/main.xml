@@ -19,7 +19,8 @@
         android:id="@+id/button_write"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_write" />
+        android:text="@string/button_write"
+        android:onClick="writeTag" />
 
     <ProgressBar
         android:id="@+id/main_progress"
@@ -27,5 +28,12 @@
         android:layout_height="wrap_content"
         android:indeterminate="true"
         android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/select_application"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/select_application"
+        android:onClick="selectApplication"/>
 
 </LinearLayout>

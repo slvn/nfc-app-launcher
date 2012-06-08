@@ -5,6 +5,9 @@ Simple application to write AAR (Android Application Records) on NFC tags.
 
 http://developer.android.com/guide/topics/nfc/nfc.html#aar
 
+You can manually select an installed application you want to write on a NFC Tag.
+
+Alternative:
 In order to use AAR, you must retrieve the package name of the application:
 - go to the android market
 - search for your app and check the URL
@@ -18,7 +21,7 @@ If the application in not installed on the phone, the user will be redirected to
 
 
 TODO :
-- List installed applications
+
 - Improve stability / check if NFC is available
 - Open intent
 - UI ...

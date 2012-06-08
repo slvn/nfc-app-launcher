@@ -11,20 +11,19 @@ import android.nfc.Tag;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import fr.slvn.nfc.app.aarwriter.tools.NfcUtils;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends Activity {
 
     // Static
     private static final String EXTRA_PACKAGE_NAME = "package_name";
+    private static final int REQUEST_CODE_APP_SELECTION = 1;
 
     // Views
-    private Button mButton;
     private EditText mEditText;
     private ProgressBar mProgressBar;
 
@@ -41,9 +40,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         mProgressBar = (ProgressBar) findViewById(R.id.main_progress);
         mEditText = (EditText) findViewById(R.id.edit_package);
-        mButton = (Button) findViewById(R.id.button_write);
-
-        mButton.setOnClickListener(this);
 
         mNfcAdapter = NfcAdapter.getDefaultAdapter(getApplicationContext());
     }
@@ -55,18 +51,19 @@ public class MainActivity extends Activity implements View.OnClickListener {
         unFreezeUi();
     }
 
-    public void onClick(View v) {
-        if (v == mButton) {
-
-            String packageName = retrievePackageName();
-
-            if (packageName != null) {
-                freezeUi();
-                Toast.makeText(this, getString(R.string.help_toast), Toast.LENGTH_LONG).show();
-                mNfcAdapter.enableForegroundDispatch(this, getPendingIntent(packageName),
-                        mWaitTagFilters, null);
-            }
+    public void writeTag(View v) {
+        String packageName = retrievePackageName();
+        if (packageName != null) {
+            freezeUi();
+            Toast.makeText(this, getString(R.string.help_toast), Toast.LENGTH_LONG).show();
+            mNfcAdapter.enableForegroundDispatch(this, getPendingIntent(packageName),
+                    mWaitTagFilters, null);
         }
+    }
+
+    public void selectApplication(View v) {
+        Intent intent = new Intent(this, ApplicationListActivity.class);
+        startActivityForResult(intent, REQUEST_CODE_APP_SELECTION);
     }
 
     private String retrievePackageName() {
@@ -138,4 +135,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
         mProgressBar.setVisibility(View.INVISIBLE);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case REQUEST_CODE_APP_SELECTION:
+                if (resultCode == RESULT_OK) {
+                    mEditText.setText(data.getStringExtra(ApplicationListActivity.PACKAGE_NAME));
+                }
+                break;
+        }
+    }
 }
