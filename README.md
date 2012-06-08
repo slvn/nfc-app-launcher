@@ -25,5 +25,4 @@ TODO :
 - Improve stability / check if NFC is available
 - Open intent
 - UI ...
-- Icons
 - Translation
